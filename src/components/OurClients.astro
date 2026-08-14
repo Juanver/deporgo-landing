@@ -1,7 +1,7 @@
 ---
 const clients = [
-  { name: "Club Andino FC", initials: "AF" },
-  { name: "Liga Metropolitana", initials: "LM" }
+  { name: "Little Panda FC", initials: "LP", img: "/images/little-panda.png" },
+  { name: "Pancho Pichangas", initials: "PP", img: "" }
 ];
 
 const carouselItems = [...clients, ...clients];
@@ -15,9 +15,11 @@ const carouselItems = [...clients, ...clients];
       <ul class="clients-track" role="list">
         {carouselItems.map((client, index) => (
           <li class="clients-item card-base" aria-label={client.name} aria-hidden={index >= clients.length ? "true" : "false"}>
-            <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-primary-300/35 bg-primary-950/40 font-bold text-primary-300">
-              {client.initials}
-            </div>
+            {
+              client.img
+                ? <img src={client.img} alt={client.name} class="h-20 rounded-full object-cover" />
+                : <span class="inline-flex h-20 w-20 items-center justify-center rounded-full bg-primary-950 text-lg font-semibold text-primary-300">{client.initials}</span>
+            }
             <p class="mt-4 text-sm font-semibold text-secondary-200">{client.name}</p>
             <p class="mt-1 text-sm text-secondary-400">Cliente activo</p>
           </li>
