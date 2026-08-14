@@ -1,0 +1,28 @@
+---
+const clients = [
+  { name: "Club Andino FC", initials: "AF" },
+  { name: "Liga Metropolitana", initials: "LM" }
+];
+
+const carouselItems = [...clients, ...clients];
+---
+
+<section class="border-y border-secondary-700 py-14" aria-labelledby="clients-title" data-reveal>
+  <div class="section-container">
+    <h2 id="clients-title" class="section-title text-center" data-reveal>Confian en nosotros</h2>
+
+    <div class="clients-carousel mt-8" aria-label="Carrusel de clientes" data-reveal>
+      <ul class="clients-track" role="list">
+        {carouselItems.map((client, index) => (
+          <li class="clients-item card-base" aria-label={client.name} aria-hidden={index >= clients.length ? "true" : "false"}>
+            <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-primary-300/35 bg-primary-950/40 font-bold text-primary-300">
+              {client.initials}
+            </div>
+            <p class="mt-4 text-sm font-semibold text-secondary-200">{client.name}</p>
+            <p class="mt-1 text-sm text-secondary-400">Cliente activo</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
