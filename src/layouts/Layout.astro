@@ -1,5 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 import "../styles/global.css";
 
 interface Props {
@@ -11,7 +13,8 @@ interface Props {
   structuredData?: Record<string, unknown> | string;
 }
 
-const { title, description, canonical, image, noindex, structuredData } = Astro.props as Props;
+const { title, description, canonical, image, noindex, structuredData } =
+  Astro.props as Props;
 ---
 
 <!doctype html>
@@ -31,7 +34,8 @@ const { title, description, canonical, image, noindex, structuredData } = Astro.
   </head>
   <body class="min-h-screen bg-secondary-950 text-secondary-200">
     <slot />
-
+    <Analytics />
+    <SpeedInsights />
     <script>
       const revealItems = document.querySelectorAll("[data-reveal]");
 
@@ -44,7 +48,7 @@ const { title, description, canonical, image, noindex, structuredData } = Astro.
               obs.unobserve(entry.target);
             });
           },
-          { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+          { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
         );
 
         revealItems.forEach((item) => observer.observe(item));
