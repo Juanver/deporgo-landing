@@ -5,72 +5,84 @@ import Hero from "../components/Hero.astro";
 import OurClients from "../components/OurClients.astro";
 import FeatureCard from "../components/FeatureCard.astro";
 import Footer from "../components/Footer.astro";
+import SolutionSection from "@/components/SolutionSection.astro";
 
 const clubFeatures = [
   {
     icon: "🏟️",
     title: "Membresías y planes",
-    description: "Controla socios activos, vencimientos y renovaciones desde un solo panel.",
+    description:
+      "Controla socios activos, vencimientos y renovaciones desde un solo panel.",
     points: [
       "Estados de membresía en tiempo real",
       "Recordatorios automáticos por WhatsApp",
-      "Segmentación por categoría o sede"
-    ]
+      "Segmentación por categoría o sede",
+    ],
   },
   {
     icon: "📋",
     title: "Asistencia y aforos",
-    description: "Gestiona cupos por entrenamiento o clase evitando sobrecarga operativa.",
+    description:
+      "Gestiona cupos por entrenamiento o clase evitando sobrecarga operativa.",
     points: [
       "Registro rápido de asistencia",
       "Límites por sesión y lista de espera",
-      "Alertas automáticas a ausentes"
-    ]
+      "Alertas automáticas a ausentes",
+    ],
   },
   {
     icon: "💳",
     title: "Cobros simplificados",
-    description: "Reduce morosidad con flujos de pago claros y confirmación automática.",
+    description:
+      "Reduce morosidad con flujos de pago claros y confirmación automática.",
     points: [
       "Seguimiento de pagos pendientes",
       "Notificaciones previas al vencimiento",
-      "Historial centralizado por cliente"
-    ]
-  }
+      "Historial centralizado por cliente",
+    ],
+  },
 ];
 
 const pichangaFeatures = [
   {
     icon: "⚽",
     title: "Listas en segundos",
-    description: "Publica partido, abre cupos y confirma jugadores en tiempo récord.",
+    description:
+      "Publica partido, abre cupos y confirma jugadores en tiempo récord.",
     points: [
       "Convocatorias instantáneas",
       "Confirmación por orden de llegada",
-      "Control de suplentes y reemplazos"
-    ]
+      "Control de suplentes y reemplazos",
+    ],
   },
   {
     icon: "💬",
     title: "Cierre automático por WhatsApp",
-    description: "Cuando se llenan los cupos, Deporgo cierra la lista y avisa a todos automáticamente.",
+    description:
+      "Cuando se llenan los cupos, Deporgo cierra la lista y avisa a todos automáticamente.",
     points: [
       "Mensajes de cierre sin intervención manual",
       "Avisos de última hora para suplentes",
-      "Menos spam y más claridad"
-    ]
+      "Menos spam y más claridad",
+    ],
   },
   {
     icon: "💸",
     title: "Pagos ordenados",
-    description: "Controla quién pagó, quién falta y evita discusiones antes del partido.",
+    description:
+      "Controla quién pagó, quién falta y evita discusiones antes del partido.",
     points: [
       "Estado de pago por jugador",
       "Recordatorios antes del evento",
-      "Resumen rápido para el organizador"
-    ]
-  }
+      "Resumen rápido para el organizador",
+    ],
+  },
 ];
+
+const demoMedia = {
+  clubVideo: "",
+  pichangasVideo: "",
+};
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -83,8 +95,8 @@ const jsonLd = {
   offers: {
     "@type": "Offer",
     price: "0",
-    priceCurrency: "USD"
-  }
+    priceCurrency: "USD",
+  },
 };
 ---
 
@@ -100,76 +112,194 @@ const jsonLd = {
 
   <main>
     <Hero />
+    <SolutionSection />
+
     <OurClients />
 
-    <section id="como-funciona" class="py-20" aria-labelledby="how-title" data-reveal>
+    <section
+      id="como-funciona"
+      class="py-20"
+      aria-labelledby="how-title"
+      data-reveal
+    >
       <div class="section-container">
         <h2 id="how-title" class="section-title" data-reveal>Cómo funciona</h2>
-        <p class="section-subtitle" data-reveal>Una operación clara en tres pasos para mover tu gestión deportiva de lo manual a lo automático.</p>
+        <p class="section-subtitle" data-reveal>
+          Una operación clara en tres pasos para mover tu gestión deportiva de
+          lo manual a lo automático.
+        </p>
 
         <ol class="mt-10 grid gap-6 md:grid-cols-3">
           <li class="card-base" data-reveal>
             <span class="text-sm font-semibold text-primary-400">Paso 1</span>
-            <h3 class="mt-2 text-xl font-semibold text-secondary-200">Configura tu actividad</h3>
-            <p class="mt-2 text-secondary-300">Define horarios, cupos, reglas y valores de inscripción según tu tipo de operación.</p>
+            <h3 class="mt-2 text-xl font-semibold text-secondary-200">
+              Configura tu actividad
+            </h3>
+            <p class="mt-2 text-secondary-300">
+              Define horarios, cupos, reglas y valores de inscripción según tu
+              tipo de operación.
+            </p>
           </li>
           <li class="card-base" data-reveal>
             <span class="text-sm font-semibold text-primary-400">Paso 2</span>
-            <h3 class="mt-2 text-xl font-semibold text-secondary-200">Invita por WhatsApp</h3>
-            <p class="mt-2 text-secondary-300">Comparte tu convocatoria y deja que Deporgo gestione confirmaciones y respuestas.</p>
+            <h3 class="mt-2 text-xl font-semibold text-secondary-200">
+              Invita por WhatsApp
+            </h3>
+            <p class="mt-2 text-secondary-300">
+              Comparte tu convocatoria y deja que Deporgo gestione
+              confirmaciones y respuestas.
+            </p>
           </li>
           <li class="card-base" data-reveal>
             <span class="text-sm font-semibold text-primary-400">Paso 3</span>
-            <h3 class="mt-2 text-xl font-semibold text-secondary-200">Automatiza cierres y seguimiento</h3>
-            <p class="mt-2 text-secondary-300">Cuando se completa el aforo, Deporgo cierra listas y mantiene al grupo informado automáticamente.</p>
+            <h3 class="mt-2 text-xl font-semibold text-secondary-200">
+              Automatiza cierres y seguimiento
+            </h3>
+            <p class="mt-2 text-secondary-300">
+              Cuando se completa el aforo, Deporgo cierra listas y mantiene al
+              grupo informado automáticamente.
+            </p>
           </li>
         </ol>
       </div>
     </section>
 
-    <section id="clubs" class="border-y border-secondary-700 py-20" aria-labelledby="clubs-title" data-reveal>
+    <!-- <section id="en-accion" class="border-y border-secondary-700 py-20" aria-labelledby="action-title" data-reveal>
       <div class="section-container">
-        <h2 id="clubs-title" class="section-title" data-reveal>Soluciones para Clubes y Academias</h2>
-        <p class="section-subtitle" data-reveal>Escala tu operación profesional con control de membresías, asistencia y límites por sesión.</p>
+        <h2 id="action-title" class="section-title" data-reveal>Deporgo en acción</h2>
+        <p class="section-subtitle" data-reveal>
+          Mira cómo la app automatiza tareas clave y te permite operar con más orden, rapidez y menos carga manual.
+        </p>
+
+        <div class="mt-10 grid gap-6 lg:grid-cols-2">
+          <article class="card-base" data-reveal>
+            <h3 class="text-xl font-semibold text-secondary-200">Gestión de club</h3>
+            <p class="mt-2 text-secondary-300">
+              Control de membresías, asistencia y cobros con comunicación automática por WhatsApp.
+            </p>
+
+            <div class="mt-6 overflow-hidden rounded-xl border border-secondary-700 bg-secondary-900/70">
+              <video
+                class="aspect-video h-full w-full object-cover"
+                autoplay
+                muted
+                loop
+                playsinline
+                controls
+                preload="none"
+                poster="/images/logo-bg-dark.png"
+              >
+                {demoMedia.clubVideo && <source src={demoMedia.clubVideo} type="video/mp4" />}
+                Tu navegador no soporta videos embebidos.
+              </video>
+            </div>
+            <p class="mt-2 text-xs text-secondary-400">Placeholder de video/GIF. Reemplaza `demoMedia.clubVideo` con tu URL.</p>
+          </article>
+
+          <article class="card-base" data-reveal>
+            <h3 class="text-xl font-semibold text-secondary-200">Gestión de pichangas</h3>
+            <p class="mt-2 text-secondary-300">
+              Convocatorias rápidas, confirmación de cupos y cierre automático cuando se llena la lista.
+            </p>
+
+            <div class="mt-6 overflow-hidden rounded-xl border border-secondary-700 bg-secondary-900/70">
+              <video
+                class="aspect-video h-full w-full object-cover"
+                autoplay
+                muted
+                loop
+                playsinline
+                controls
+                preload="none"
+                poster="/images/logo-bg-dark.png"
+              >
+                {demoMedia.pichangasVideo && <source src={demoMedia.pichangasVideo} type="video/mp4" />}
+                Tu navegador no soporta videos embebidos.
+              </video>
+            </div>
+            <p class="mt-2 text-xs text-secondary-400">Placeholder de video/GIF. Reemplaza `demoMedia.pichangasVideo` con tu URL.</p>
+          </article>
+        </div>
+      </div>
+    </section> -->
+
+    <section
+      id="clubs"
+      class="border-y border-secondary-700 py-20"
+      aria-labelledby="clubs-title"
+      data-reveal
+    >
+      <div class="section-container">
+        <h2 id="clubs-title" class="section-title" data-reveal>
+          Soluciones para Clubes y Academias
+        </h2>
+        <p class="section-subtitle" data-reveal>
+          Escala tu operación profesional con control de membresías, asistencia
+          y límites por sesión.
+        </p>
 
         <div class="mt-10 grid gap-6 lg:grid-cols-3" data-reveal>
-          {clubFeatures.map((feature) => (
-            <FeatureCard {...feature} />
-          ))}
+          {clubFeatures.map((feature) => <FeatureCard {...feature} />)}
         </div>
 
         <div class="mt-10" data-reveal>
-          <a href="https://app.deporgo.com" target="_blank" rel="noreferrer" class="btn-primary" aria-label="Probar Deporgo para clubes">
+          <a
+            href="https://app.deporgo.com"
+            target="_blank"
+            rel="noreferrer"
+            class="btn-primary"
+            aria-label="Probar Deporgo para clubes"
+          >
             Probar App para Clubes
           </a>
         </div>
       </div>
     </section>
 
-    <section id="pichangas" class="py-20" aria-labelledby="pichangas-title" data-reveal>
+    <section
+      id="pichangas"
+      class="py-20"
+      aria-labelledby="pichangas-title"
+      data-reveal
+    >
       <div class="section-container">
-        <h2 id="pichangas-title" class="section-title" data-reveal>Soluciones para Pichangas</h2>
-        <p class="section-subtitle" data-reveal>Gestiona partidos casuales con listas rápidas, pagos ordenados y cierre automático por WhatsApp.</p>
+        <h2 id="pichangas-title" class="section-title" data-reveal>
+          Soluciones para Pichangas
+        </h2>
+        <p class="section-subtitle" data-reveal>
+          Gestiona partidos casuales con listas rápidas, pagos ordenados y
+          cierre automático por WhatsApp.
+        </p>
 
         <div class="mt-10 grid gap-6 lg:grid-cols-3" data-reveal>
-          {pichangaFeatures.map((feature) => (
-            <FeatureCard {...feature} />
-          ))}
+          {pichangaFeatures.map((feature) => <FeatureCard {...feature} />)}
         </div>
 
         <div class="mt-10" data-reveal>
-          <a href="https://app.deporgo.com" target="_blank" rel="noreferrer" class="btn-primary" aria-label="Probar Deporgo para pichangas">
+          <a
+            href="https://app.deporgo.com"
+            target="_blank"
+            rel="noreferrer"
+            class="btn-primary"
+            aria-label="Probar Deporgo para pichangas"
+          >
             Probar App para Pichangas
           </a>
         </div>
       </div>
     </section>
 
-    <section id="contacto" class="border-t border-secondary-700 py-20" aria-labelledby="contact-title" data-reveal>
+    <section
+      id="contacto"
+      class="border-t border-secondary-700 py-20"
+      aria-labelledby="contact-title"
+      data-reveal
+    >
       <div class="section-container">
         <h2 id="contact-title" class="section-title" data-reveal>Contacto</h2>
         <p class="section-subtitle" data-reveal>
-          Escríbenos por WhatsApp y te ayudamos a implementar Deporgo en tu operación deportiva.
+          Escríbenos por WhatsApp y te ayudamos a implementar Deporgo en tu
+          operación deportiva.
         </p>
 
         <div class="mt-10" data-reveal>
