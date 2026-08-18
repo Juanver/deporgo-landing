@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
-import vercel from "@astrojs/vercel";
 
 export default defineConfig({
   site: "https://deporgo.com",
@@ -9,6 +8,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  adapter: vercel(),
-  output: "server"
+  output: "static"
 });

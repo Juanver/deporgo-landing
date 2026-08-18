@@ -2,6 +2,8 @@
 import { logoPath } from "@/data/logo";
 
 const navLinks = [
+  { href: "#demo", label: "Demo" },
+  { href: "#clientes", label: "Clientes" },
   { href: "#como-funciona", label: "Cómo funciona" },
   { href: "#clubs", label: "Para clubes" },
   { href: "#pichangas", label: "Para pichangas" },
@@ -22,6 +24,10 @@ const navLinks = [
       <img
         src={logoPath}
         alt="Deporgo Logo"
+        width="36"
+        height="36"
+        fetchpriority="high"
+        decoding="async"
         class="inline-flex h-9 w-9 items-center justify-center"
       />
       <span class="text-lg font-semibold text-secondary-200">Deporgo</span>
@@ -35,7 +41,7 @@ const navLinks = [
         navLinks.map((link) => (
           <a
             href={link.href}
-            class="text-sm font-medium text-secondary-300 transition hover:text-primary-400"
+            class="text-sm font-medium text-secondary-300 transition hover:text-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-950"
           >
             {link.label}
           </a>
@@ -44,7 +50,8 @@ const navLinks = [
       <a
         href="https://app.deporgo.com"
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
+        aria-label="Probar app de Deporgo en una nueva pestaña"
         class="btn-primary"
       >
         Probar App
@@ -87,6 +94,9 @@ const navLinks = [
     id="mobile-drawer"
     class="fixed inset-y-0 right-0 z-50 h-dvh w-80 max-w-[85vw] translate-x-full overflow-y-auto border-l border-secondary-700 bg-secondary-900 p-6 transition-transform duration-300 md:hidden"
     aria-label="Menú móvil"
+    role="dialog"
+    aria-modal="true"
+    tabindex="-1"
   >
     <div class="mb-8 flex items-center justify-between">
       <span class="text-lg font-semibold text-secondary-200">Menú</span>
@@ -116,7 +126,7 @@ const navLinks = [
         navLinks.map((link) => (
           <a
             href={link.href}
-            class="mobile-link text-base font-medium text-secondary-300 transition hover:text-primary-400"
+            class="mobile-link text-base font-medium text-secondary-300 transition hover:text-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-900"
           >
             {link.label}
           </a>
@@ -125,7 +135,8 @@ const navLinks = [
       <a
         href="https://app.deporgo.com"
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
+        aria-label="Probar app de Deporgo en una nueva pestaña"
         class="btn-primary mt-3"
       >
         Probar App
@@ -142,13 +153,16 @@ const navLinks = [
   const drawer = document.getElementById("mobile-drawer");
   const overlay = document.getElementById("mobile-overlay");
   const links = document.querySelectorAll(".mobile-link");
+  let previousFocusedElement: Element | null = null;
 
   if (menuButton && closeButton && drawer && overlay) {
     const openMenu = () => {
+      previousFocusedElement = document.activeElement;
       drawer.classList.remove("translate-x-full");
       overlay.classList.remove("hidden");
       menuButton.setAttribute("aria-expanded", "true");
       document.body.classList.add("overflow-hidden");
+      closeButton.focus();
     };
 
     const closeMenu = () => {
@@ -156,6 +170,9 @@ const navLinks = [
       overlay.classList.add("hidden");
       menuButton.setAttribute("aria-expanded", "false");
       document.body.classList.remove("overflow-hidden");
+      if (previousFocusedElement instanceof HTMLElement) {
+        previousFocusedElement.focus();
+      }
     };
 
     menuButton.addEventListener("click", openMenu);

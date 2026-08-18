@@ -16,7 +16,9 @@
   --color-secondary-900: #0f172a;
   --color-secondary-950: #020617;
 
-  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
 }
 
 :root {
@@ -56,21 +58,27 @@ h4 {
 }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center rounded-xl bg-primary-600 px-5 py-3 font-semibold text-white transition hover:bg-primary-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-300;
+  @apply inline-flex items-center justify-center rounded-xl bg-primary-600 px-5 py-3 font-semibold text-white transition hover:bg-primary-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-950;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center rounded-xl border border-primary-300/40 bg-primary-950/40 px-5 py-3 font-semibold text-primary-300 transition hover:border-primary-400 hover:text-primary-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-300;
+  @apply inline-flex items-center justify-center rounded-xl border border-primary-300/40 bg-primary-950/40 px-5 py-3 font-semibold text-primary-300 transition hover:border-primary-400 hover:text-primary-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-950;
 }
 
 .btn-outline {
-  @apply inline-flex items-center justify-center rounded-xl border border-secondary-200/60 bg-transparent px-5 py-3 font-semibold text-secondary-200 transition hover:border-primary-300 hover:text-primary-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-300;
+  @apply inline-flex items-center justify-center rounded-xl border border-secondary-200/60 bg-transparent px-5 py-3 font-semibold text-secondary-200 transition hover:border-primary-300 hover:text-primary-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-950;
+}
+
+.skip-link {
+  @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-lg focus:bg-primary-500 focus:px-4 focus:py-2 focus:font-semibold focus:text-white;
 }
 
 .js [data-reveal] {
   opacity: 0;
   transform: translateY(26px) scale(0.98);
-  transition: opacity 0.65s ease, transform 0.65s ease;
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s ease;
 }
 
 .js [data-reveal].is-visible {
@@ -102,7 +110,13 @@ h4 {
 
 .clients-carousel {
   overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
 }
 
 .clients-track {
@@ -114,6 +128,85 @@ h4 {
 
 .clients-item {
   min-width: 240px;
+}
+
+@keyframes signal2 {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(220%);
+    opacity: 0;
+  }
+}
+
+
+
+@layer utilities {
+  /* Definimos la clase de utilidad para la máscara */
+  .text-shine-mask {
+    /* Color base del texto brillante */
+    color: theme("colors.primary.300");
+
+    /* Definimos la máscara. Usamos un degradado lineal que se mueve.
+       Es transparente en los extremos y blanco (opaco) en el centro.
+       La posición inicial de la máscara es fuera de la izquierda. */
+    mask-image: linear-gradient(
+      90deg,
+      transparent 25%,
+      white 50%,
+      transparent 75%
+    );
+
+    /* Tamaño de la máscara: debe ser más ancha que el texto para que el barrido se note */
+    mask-size: 200% 100%;
+
+    /* Aseguramos que la máscara se comporte como una sola capa */
+    mask-repeat: no-repeat;
+
+    /* Necesario para navegadores Webkit (Safari/Chrome) */
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 25%,
+      white 50%,
+      transparent 75%
+    );
+    -webkit-mask-size: 200% 100%;
+    -webkit-mask-repeat: no-repeat;
+  }
+
+  /* Reutilizamos y ajustamos la animación 'signal' existente
+     para que anime la posición de la máscara de fondo */
+  @keyframes signal {
+    0% {
+      /* Comenzamos con la parte transparente de la máscara sobre el texto */
+      mask-position: 150% 0;
+      -webkit-mask-position: 150% 0;
+      opacity: 0; /* Un pequeño fade extra para suavizar */
+    }
+    20% {
+      opacity: 1;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      /* Terminamos con la parte transparente de la máscara pasando el texto */
+      mask-position: -50% 0;
+      -webkit-mask-position: -50% 0;
+      opacity: 0;
+    }
+  }
 }
 
 @keyframes clients-scroll {

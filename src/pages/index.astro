@@ -8,11 +8,6 @@ import Footer from "../components/Footer.astro";
 import SolutionSection from "@/components/SolutionSection.astro";
 import { clubFeatures, pichangaFeatures } from "@/data/features";
 
-const demoMedia = {
-  clubVideo: "",
-  pichangasVideo: "",
-};
-
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -39,7 +34,7 @@ const jsonLd = {
     <Header />
   </header>
 
-  <main>
+  <main id="main-content">
     <Hero />
     <SolutionSection />
 
@@ -175,7 +170,7 @@ const jsonLd = {
           <a
             href="https://app.deporgo.com"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             class="btn-primary"
             aria-label="Probar Deporgo para clubes"
           >
@@ -208,7 +203,7 @@ const jsonLd = {
           <a
             href="https://app.deporgo.com"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             class="btn-primary"
             aria-label="Probar Deporgo para pichangas"
           >
@@ -235,7 +230,7 @@ const jsonLd = {
           <a
             href="https://wa.me/51979765191"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             class="btn-primary"
             aria-label="Contactar por WhatsApp al +51 979765191"
           >

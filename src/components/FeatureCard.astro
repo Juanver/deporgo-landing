@@ -13,7 +13,7 @@ const { title, description, points, Icon } = Astro.props as Props;
 <article class="card-base h-full">
   <!-- <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary-950 text-lg text-primary-300">{icon}</div> -->
   <div class="flex items-start gap-2">
-    {Icon && <Icon class="text-primary-300" />}
+    {Icon && <Icon class="text-primary-300" aria-hidden="true" />}
     <h3 class="text-xl font-semibold text-secondary-200">{title}</h3>
   </div>
   <p class="mt-2 text-secondary-300">{description}</p>

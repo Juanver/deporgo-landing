@@ -33,13 +33,21 @@ const { title, description, canonical, image, noindex, structuredData } =
     </script>
   </head>
   <body class="min-h-screen bg-secondary-950 text-secondary-200">
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
     <slot />
     <Analytics />
     <SpeedInsights />
     <script>
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduceMotion) {
+        document.querySelectorAll("[data-reveal]").forEach((item) => {
+          item.classList.add("is-visible");
+        });
+      }
+
       const revealItems = document.querySelectorAll("[data-reveal]");
 
-      if (revealItems.length > 0) {
+      if (!reduceMotion && revealItems.length > 0) {
         const observer = new IntersectionObserver(
           (entries, obs) => {
             entries.forEach((entry) => {

@@ -1,5 +1,5 @@
 import type { Feature } from "@/types/iconFeatures";
-import { Flame, ClipboardList, HandCoins, MessageCircleMore, Wallet, BotMessageSquare } from "@lucide/astro";
+import { Flame, ClipboardList, HandCoins, Wallet, BotMessageSquare } from "@lucide/astro";
 
 export const clubFeatures: Feature[] = [
   {

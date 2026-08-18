@@ -7,17 +7,17 @@ const clients = [
 const carouselItems = [...clients, ...clients];
 ---
 
-<section class="border-y border-secondary-700 py-14" aria-labelledby="clients-title" data-reveal>
+<section id="clientes" class="border-y border-secondary-700 py-14" aria-labelledby="clients-title" data-reveal>
   <div class="section-container">
-    <h2 id="clients-title" class="section-title text-center" data-reveal>Confian en nosotros</h2>
+    <h2 id="clients-title" class="section-title text-center" data-reveal>Confían en nosotros</h2>
 
     <div class="clients-carousel mt-8" aria-label="Carrusel de clientes" data-reveal>
       <ul class="clients-track" role="list">
         {carouselItems.map((client, index) => (
-          <li class="clients-item card-base" aria-label={client.name} aria-hidden={index >= clients.length ? "true" : "false"}>
+          <li class="clients-item card-base" aria-label={client.name} aria-hidden={index >= clients.length}>
             {
               client.img
-                ? <img src={client.img} alt={client.name} class="h-20 rounded-full object-cover" />
+                ? <img src={client.img} alt={client.name} width="80" height="80" loading="lazy" decoding="async" class="h-20 w-20 rounded-full object-cover" />
                 : <span class="inline-flex h-20 w-20 items-center justify-center rounded-full bg-primary-950 text-lg font-semibold text-primary-300">{client.initials}</span>
             }
             <p class="mt-4 text-sm font-semibold text-secondary-200">{client.name}</p>

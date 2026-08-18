@@ -10,6 +10,10 @@ import { logoPath } from "@/data/logo";
       <img
         src={logoPath}
         alt="Deporgo Logo"
+        width="36"
+        height="36"
+        loading="lazy"
+        decoding="async"
         class="inline-flex h-9 w-9 items-center justify-center"
       />
       <span class="text-lg font-semibold text-secondary-200">Deporgo</span>
@@ -21,7 +25,7 @@ import { logoPath } from "@/data/logo";
       <a
         href="https://wa.me/51979765191"
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         class="mt-3 inline-flex text-sm font-semibold text-primary-300 transition hover:text-primary-400"
         aria-label="Contactar por WhatsApp al +51 979765191"
       >
