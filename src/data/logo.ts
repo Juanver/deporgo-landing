@@ -1,0 +1,2 @@
+export const logoPath =
+  "https://vrcclvbagevufvcyeipw.supabase.co/storage/v1/object/sign/deporgo/logos/logo-bg-dark.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iMDZiOTkzZS1hNGMwLTQwMmEtODliMS1iZWE2NzcwMTc2ZWYiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJkZXBvcmdvL2xvZ29zL2xvZ28tYmctZGFyay5wbmciLCJzY29wZSI6ImRvd25sb2FkIiwiaWF0IjoxNzg3MDI1NTkxLCJleHAiOjE4MTg1NjE1OTF9._jAEbewoN9vxpyH44qtYS54hVPznCQmU8-0P0QMYq_g";

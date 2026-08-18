@@ -6,78 +6,7 @@ import OurClients from "../components/OurClients.astro";
 import FeatureCard from "../components/FeatureCard.astro";
 import Footer from "../components/Footer.astro";
 import SolutionSection from "@/components/SolutionSection.astro";
-
-const clubFeatures = [
-  {
-    icon: "🏟️",
-    title: "Membresías y planes",
-    description:
-      "Controla socios activos, vencimientos y renovaciones desde un solo panel.",
-    points: [
-      "Estados de membresía en tiempo real",
-      "Recordatorios automáticos por WhatsApp",
-      "Segmentación por categoría o sede",
-    ],
-  },
-  {
-    icon: "📋",
-    title: "Asistencia y aforos",
-    description:
-      "Gestiona cupos por entrenamiento o clase evitando sobrecarga operativa.",
-    points: [
-      "Registro rápido de asistencia",
-      "Límites por sesión y lista de espera",
-      "Alertas automáticas a ausentes",
-    ],
-  },
-  {
-    icon: "💳",
-    title: "Cobros simplificados",
-    description:
-      "Reduce morosidad con flujos de pago claros y confirmación automática.",
-    points: [
-      "Seguimiento de pagos pendientes",
-      "Notificaciones previas al vencimiento",
-      "Historial centralizado por cliente",
-    ],
-  },
-];
-
-const pichangaFeatures = [
-  {
-    icon: "⚽",
-    title: "Listas en segundos",
-    description:
-      "Publica partido, abre cupos y confirma jugadores en tiempo récord.",
-    points: [
-      "Convocatorias instantáneas",
-      "Confirmación por orden de llegada",
-      "Control de suplentes y reemplazos",
-    ],
-  },
-  {
-    icon: "💬",
-    title: "Cierre automático por WhatsApp",
-    description:
-      "Cuando se llenan los cupos, Deporgo cierra la lista y avisa a todos automáticamente.",
-    points: [
-      "Mensajes de cierre sin intervención manual",
-      "Avisos de última hora para suplentes",
-      "Menos spam y más claridad",
-    ],
-  },
-  {
-    icon: "💸",
-    title: "Pagos ordenados",
-    description:
-      "Controla quién pagó, quién falta y evita discusiones antes del partido.",
-    points: [
-      "Estado de pago por jugador",
-      "Recordatorios antes del evento",
-      "Resumen rápido para el organizador",
-    ],
-  },
-];
+import { clubFeatures, pichangaFeatures } from "@/data/features";
 
 const demoMedia = {
   clubVideo: "",
@@ -187,7 +116,7 @@ const jsonLd = {
                 playsinline
                 controls
                 preload="none"
-                poster="/images/logo-bg-dark.png"
+                poster=logoPath
               >
                 {demoMedia.clubVideo && <source src={demoMedia.clubVideo} type="video/mp4" />}
                 Tu navegador no soporta videos embebidos.
@@ -211,7 +140,7 @@ const jsonLd = {
                 playsinline
                 controls
                 preload="none"
-                poster="/images/logo-bg-dark.png"
+                poster=logoPath
               >
                 {demoMedia.pichangasVideo && <source src={demoMedia.pichangasVideo} type="video/mp4" />}
                 Tu navegador no soporta videos embebidos.

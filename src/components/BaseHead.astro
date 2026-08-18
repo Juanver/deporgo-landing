@@ -1,4 +1,6 @@
 ---
+import { logoPath } from "@/data/logo";
+
 interface Props {
   title?: string;
   description?: string;
@@ -13,10 +15,10 @@ const {
   title = "Deporgo | Gestión deportiva por WhatsApp",
   description = "Automatiza pagos, asistencia y comunicación para clubes y pichangas con Deporgo integrado a WhatsApp.",
   canonical,
-  image = "/images/logo-bg-dark.png",
+  image = logoPath,
   type = "website",
   noindex = false,
-  structuredData
+  structuredData,
 } = Astro.props as Props;
 
 const site = Astro.site ?? new URL(Astro.url.origin);
