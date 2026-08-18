@@ -1,13 +1,23 @@
 ---
 import { logoPath } from "@/data/logo";
 
-const normalizePath = (path: string) => (path !== "/" ? path.replace(/\/+$/, "") : "/");
+const normalizePath = (path: string) =>
+  path !== "/" ? path.replace(/\/+$/, "") : "/";
 const currentPath = normalizePath(Astro.url.pathname);
 const isHomePage = currentPath === "/";
 const homeSectionHref = (sectionId: string) =>
   isHomePage ? `#${sectionId}` : `/#${sectionId}`;
 
-const navLinks = [
+const desktopNavLinks = [
+  { href: "/automatizacion-deportiva/", label: "Automatización deportiva" },
+  { href: homeSectionHref("demo"), label: "Demo" },
+  { href: homeSectionHref("clientes"), label: "Clientes" },
+  { href: homeSectionHref("como-funciona"), label: "Cómo funciona" },
+  { href: homeSectionHref("clubs"), label: "Soluciones" },
+  { href: homeSectionHref("faq"), label: "FAQ" },
+];
+
+const mobileNavLinks = [
   { href: "/automatizacion-deportiva/", label: "Automatización deportiva" },
   { href: homeSectionHref("demo"), label: "Demo" },
   { href: homeSectionHref("clientes"), label: "Clientes" },
@@ -46,7 +56,7 @@ const navLinks = [
       class="hidden items-center gap-8 md:flex"
     >
       {
-        navLinks.map((link) => (
+        desktopNavLinks.map((link) => (
           <a
             href={link.href}
             class="text-sm font-medium text-secondary-300 transition hover:text-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-950"
@@ -55,15 +65,6 @@ const navLinks = [
           </a>
         ))
       }
-      <a
-        href="https://app.deporgo.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Probar app de Deporgo en una nueva pestaña"
-        class="btn-primary"
-      >
-        Probar App
-      </a>
     </nav>
 
     <button
@@ -131,7 +132,7 @@ const navLinks = [
 
     <nav class="flex flex-col gap-5" aria-label="Navegación móvil">
       {
-        navLinks.map((link) => (
+        mobileNavLinks.map((link) => (
           <a
             href={link.href}
             class="mobile-link text-base font-medium text-secondary-300 transition hover:text-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-900"

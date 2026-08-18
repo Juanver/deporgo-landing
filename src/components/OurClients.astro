@@ -14,7 +14,7 @@ const carouselItems = [...clients, ...clients];
           <li class="clients-item card-base" aria-label={client.name} aria-hidden={index >= clients.length}>
             {
               client.img
-                ? <img src={client.img} alt={client.name} width="80" height="80" loading="lazy" decoding="async" class="h-20 w-20 rounded-full object-cover" />
+                ? <img src={client.img} alt={client.name} width="80" height="80" loading="lazy" decoding="async" class="w-20 h-30 object-cover" />
                 : <span class="inline-flex h-20 w-20 items-center justify-center rounded-full bg-primary-950 text-lg font-semibold text-primary-300">{client.initials}</span>
             }
             <p class="mt-4 text-sm font-semibold text-secondary-200">{client.name}</p>
