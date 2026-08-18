@@ -9,11 +9,15 @@ interface Props {
   description?: string;
   canonical?: string;
   image?: string;
+  keywords?: string[];
   noindex?: boolean;
-  structuredData?: Record<string, unknown> | string;
+  structuredData?:
+    | Record<string, unknown>
+    | Array<Record<string, unknown>>
+    | string;
 }
 
-const { title, description, canonical, image, noindex, structuredData } =
+const { title, description, canonical, image, keywords, noindex, structuredData } =
   Astro.props as Props;
 ---
 
@@ -25,6 +29,7 @@ const { title, description, canonical, image, noindex, structuredData } =
       description={description}
       canonical={canonical}
       image={image}
+      keywords={keywords}
       noindex={noindex}
       structuredData={structuredData}
     />

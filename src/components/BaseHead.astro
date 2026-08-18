@@ -6,16 +6,21 @@ interface Props {
   description?: string;
   canonical?: string;
   image?: string;
+  keywords?: string[];
   type?: "website" | "article";
   noindex?: boolean;
-  structuredData?: Record<string, unknown> | string;
+  structuredData?:
+    | Record<string, unknown>
+    | Array<Record<string, unknown>>
+    | string;
 }
 
 const {
   title = "Deporgo | Gestión deportiva por WhatsApp",
-  description = "Automatiza pagos, asistencia y comunicación para clubes y pichangas con Deporgo integrado a WhatsApp.",
+  description = "Automatiza asistencias, comunicación y pagos para clubes y pichangas con Deporgo integrado a WhatsApp.",
   canonical,
   image = logoPath,
+  keywords = [],
   type = "website",
   noindex = false,
   structuredData,
@@ -27,11 +32,15 @@ const canonicalUrl = canonical
   : new URL(Astro.url.pathname, site).toString();
 const ogImage = new URL(image, site).toString();
 const robots = noindex ? "noindex, nofollow" : "index, follow";
-const schema = structuredData
-  ? typeof structuredData === "string"
+const schemaItems = structuredData
+  ? Array.isArray(structuredData)
     ? structuredData
-    : JSON.stringify(structuredData)
-  : null;
+    : [structuredData]
+  : [];
+const schema = schemaItems
+  .map((item) => (typeof item === "string" ? item : JSON.stringify(item)))
+  .join("\n");
+const keywordsContent = keywords.join(", ");
 ---
 
 <meta charset="utf-8" />
@@ -44,8 +53,10 @@ const schema = structuredData
 <link rel="dns-prefetch" href="https://images.unsplash.com" />
 <title>{title}</title>
 <meta name="description" content={description} />
+{keywordsContent && <meta name="keywords" content={keywordsContent} />}
 <meta name="robots" content={robots} />
 <link rel="canonical" href={canonicalUrl} />
+<meta name="author" content="Deporgo" />
 
 <meta property="og:type" content={type} />
 <meta property="og:site_name" content="Deporgo" />
@@ -54,11 +65,13 @@ const schema = structuredData
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:locale" content="es_PE" />
 <meta property="og:image" content={ogImage} />
+<meta property="og:image:secure_url" content={ogImage} />
 <meta property="og:image:alt" content="Deporgo" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content="Deporgo" />
 
 {schema && <script type="application/ld+json" is:inline set:html={schema} />}

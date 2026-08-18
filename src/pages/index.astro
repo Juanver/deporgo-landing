@@ -7,32 +7,18 @@ import FeatureCard from "../components/FeatureCard.astro";
 import Footer from "../components/Footer.astro";
 import SolutionSection from "@/components/SolutionSection.astro";
 import { clubFeatures, pichangaFeatures } from "@/data/features";
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Deporgo",
-  applicationCategory: "BusinessApplication",
-  operatingSystem: "Web",
-  description:
-    "Tecnología de gestión deportiva integrado con WhatsApp para clubes, academias y pichangas.",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "USD",
-  },
-};
+import FaqSection from "@/components/FaqSection.astro";
+import { homeSeo, homeStructuredData } from "@/data/seo";
 ---
 
 <Layout
-  title="Deporgo | Tecnología de gestión deportiva con WhatsApp"
-  description="Aumenta ocupación, reduce ausencias y organiza pagos con flujos automáticos por WhatsApp para clubes y pichangas."
-  canonical="https://deporgo.com/"
-  structuredData={jsonLd}
+  title={homeSeo.title}
+  description={homeSeo.description}
+  canonical={homeSeo.canonical}
+  keywords={homeSeo.keywords}
+  structuredData={homeStructuredData}
 >
-  <header>
-    <Header />
-  </header>
+  <Header />
 
   <main id="main-content">
     <Hero />
@@ -215,7 +201,7 @@ const jsonLd = {
 
     <section
       id="contacto"
-      class="border-t border-secondary-700 py-20"
+      class="py-20"
       aria-labelledby="contact-title"
       data-reveal
     >
@@ -239,6 +225,8 @@ const jsonLd = {
         </div>
       </div>
     </section>
+
+    <FaqSection />
   </main>
 
   <Footer />

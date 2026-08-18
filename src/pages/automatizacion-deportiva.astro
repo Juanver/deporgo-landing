@@ -1,0 +1,71 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import FaqSection from "@/components/FaqSection.astro";
+import { automationLandingSeo, homeStructuredData } from "@/data/seo";
+---
+
+<Layout
+  title={automationLandingSeo.title}
+  description={automationLandingSeo.description}
+  canonical={automationLandingSeo.canonical}
+  keywords={automationLandingSeo.keywords}
+  structuredData={homeStructuredData}
+>
+  <Header />
+
+  <main id="main-content">
+    <section class="border-b border-secondary-700 py-20" aria-labelledby="automation-title" data-reveal>
+      <div class="section-container">
+        <p class="text-sm font-semibold uppercase tracking-[0.14em] text-primary-300" data-reveal>
+          Automatización deportiva
+        </p>
+        <h1 id="automation-title" class="mt-4 max-w-4xl text-4xl font-extrabold leading-tight text-white sm:text-5xl" data-reveal>
+          Software de automatización deportiva para clubes, academias y pichangas
+        </h1>
+        <p class="mt-5 max-w-3xl text-lg text-secondary-300" data-reveal>
+          Deporgo centraliza convocatorias, asistencia y pagos en un flujo por WhatsApp para que tu operación escale con menos trabajo manual.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3" data-reveal>
+          <a
+            href="https://app.deporgo.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+            aria-label="Probar Deporgo en una nueva pestaña"
+          >
+            Probar Deporgo
+          </a>
+          <a href="/#como-funciona" class="btn-secondary" aria-label="Ver cómo funciona Deporgo">
+            Ver cómo funciona
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20" aria-labelledby="benefits-title" data-reveal>
+      <div class="section-container">
+        <h2 id="benefits-title" class="section-title" data-reveal>Beneficios clave para posicionarte y operar mejor</h2>
+        <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3" data-reveal>
+          <article class="card-base">
+            <h3 class="text-xl font-semibold text-secondary-200">Menos ausencias</h3>
+            <p class="mt-2 text-secondary-300">Recordatorios automáticos y confirmaciones en tiempo real para mejorar asistencia.</p>
+          </article>
+          <article class="card-base">
+            <h3 class="text-xl font-semibold text-secondary-200">Cobros ordenados</h3>
+            <p class="mt-2 text-secondary-300">Seguimiento de pagos y avisos sin procesos manuales repetitivos.</p>
+          </article>
+          <article class="card-base">
+            <h3 class="text-xl font-semibold text-secondary-200">Gestión con datos</h3>
+            <p class="mt-2 text-secondary-300">Visibilidad de cupos, listas y estados para decisiones operativas rápidas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <FaqSection />
+  </main>
+
+  <Footer />
+</Layout>
