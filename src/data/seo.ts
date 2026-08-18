@@ -65,10 +65,10 @@ export const homeStructuredData = [
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: siteConfig.name,
+    name: "Deporgo",
     legalName: siteConfig.legalName,
-    url: siteConfig.url,
-    logo: new URL(siteConfig.logo, siteConfig.url).toString(),
+    url: "https://deporgo.com",
+    logo: "https://deporgo.com/images/logo-oficial.png",
     contactPoint: {
       "@type": "ContactPoint",
       telephone: siteConfig.contactPhone,

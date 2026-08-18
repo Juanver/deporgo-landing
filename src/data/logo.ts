@@ -1,1 +1,1 @@
-export const logoPath = "/images/logo.ico";
+export const logoPath = "/images/logo-oficial.png";

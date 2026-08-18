@@ -1,15 +1,21 @@
 ---
 import { logoPath } from "@/data/logo";
 
+const normalizePath = (path: string) => (path !== "/" ? path.replace(/\/+$/, "") : "/");
+const currentPath = normalizePath(Astro.url.pathname);
+const isHomePage = currentPath === "/";
+const homeSectionHref = (sectionId: string) =>
+  isHomePage ? `#${sectionId}` : `/#${sectionId}`;
+
 const navLinks = [
   { href: "/automatizacion-deportiva/", label: "Automatización deportiva" },
-  { href: "#demo", label: "Demo" },
-  { href: "#clientes", label: "Clientes" },
-  { href: "#como-funciona", label: "Cómo funciona" },
-  { href: "#clubs", label: "Para clubes" },
-  { href: "#pichangas", label: "Para pichangas" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contacto", label: "Contacto" },
+  { href: homeSectionHref("demo"), label: "Demo" },
+  { href: homeSectionHref("clientes"), label: "Clientes" },
+  { href: homeSectionHref("como-funciona"), label: "Cómo funciona" },
+  { href: homeSectionHref("clubs"), label: "Para clubes" },
+  { href: homeSectionHref("pichangas"), label: "Para pichangas" },
+  { href: homeSectionHref("faq"), label: "FAQ" },
+  { href: homeSectionHref("contacto"), label: "Contacto" },
 ];
 ---
 
