@@ -3,7 +3,7 @@ import { logoPath } from "@/data/logo";
 export const siteConfig = {
   name: "Deporgo",
   legalName: "Deporgo",
-  url: "https://deporgo.com",
+  url: "https://www.deporgo.com",
   locale: "es_PE",
   description:
     "Automatización deportiva por WhatsApp para clubes, academias y pichangas. Gestiona pagos, asistencia y cupos en un solo flujo.",
@@ -38,6 +38,14 @@ export const automationLandingSeo = {
   keywords: targetKeywords,
 };
 
+export const notFoundSeo = {
+  title: "Página no encontrada | Deporgo",
+  description:
+    "La URL que intentas visitar no existe. Vuelve al inicio de Deporgo para continuar navegando.",
+  canonical: `${siteConfig.url}/404/`,
+  keywords: ["deporgo", "página no encontrada", "404"],
+};
+
 export const faqItems = [
   {
     question: "¿Qué es la automatización deportiva en Deporgo?",
@@ -67,8 +75,8 @@ export const homeStructuredData = [
     "@type": "Organization",
     name: "Deporgo",
     legalName: siteConfig.legalName,
-    url: "https://deporgo.com",
-    logo: "https://deporgo.com/images/logo-oficial.png",
+    url: "https://www.deporgo.com",
+    logo: "https://www.deporgo.com/images/logo-oficial.png",
     contactPoint: {
       "@type": "ContactPoint",
       telephone: siteConfig.contactPhone,

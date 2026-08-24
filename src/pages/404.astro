@@ -1,0 +1,68 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { notFoundSeo, siteConfig } from "@/data/seo";
+
+const notFoundStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: notFoundSeo.title,
+  description: notFoundSeo.description,
+  url: notFoundSeo.canonical,
+  inLanguage: "es",
+  isPartOf: {
+    "@type": "WebSite",
+    name: siteConfig.name,
+    url: siteConfig.url,
+  },
+};
+---
+
+<Layout
+  title={notFoundSeo.title}
+  description={notFoundSeo.description}
+  canonical={notFoundSeo.canonical}
+  keywords={notFoundSeo.keywords}
+  noindex={true}
+  structuredData={notFoundStructuredData}
+>
+  <Header />
+
+  <main id="main-content">
+    <section class="py-24" aria-labelledby="not-found-title" data-reveal>
+      <div class="section-container">
+        <p class="text-sm font-semibold uppercase tracking-[0.14em] text-primary-300" data-reveal>
+          Error 404
+        </p>
+
+        <h1
+          id="not-found-title"
+          class="mt-4 max-w-4xl text-4xl font-extrabold leading-tight text-white sm:text-5xl"
+          data-reveal
+        >
+          Esta página no existe
+        </h1>
+
+        <p class="mt-5 max-w-2xl text-lg text-secondary-300" data-reveal>
+          La ruta que ingresaste no está disponible o fue movida. Puedes volver al inicio o ir a nuestra página de automatización deportiva.
+        </p>
+
+        <div class="mt-10 flex flex-wrap gap-3" data-reveal>
+          <a href="/" class="btn-primary" aria-label="Volver a la página de inicio de Deporgo">
+            Ir al inicio
+          </a>
+          <a
+            href="/automatizacion-deportiva/"
+            class="btn-secondary"
+            aria-label="Ir a la página de automatización deportiva"
+          >
+            Ver automatización deportiva
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
