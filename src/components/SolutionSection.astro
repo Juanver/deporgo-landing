@@ -1,5 +1,6 @@
 ---
 import { Trophy, Handshake, BotMessageSquare, ArrowRight } from "@lucide/astro";
+import { videoDemoClubUrl, videoDemoClubUrlMobile } from "../data/videos-url.ts";
 ---
 
 <section
@@ -52,11 +53,19 @@ import { Trophy, Handshake, BotMessageSquare, ArrowRight } from "@lucide/astro";
             playsinline
             preload="none"
             aria-label="Demostración del bot de DeporGo organizando asistencia y cupos en WhatsApp"
+            title="Demostración del bot de DeporGo"
             class="w-full rounded-xl object-cover shadow-inner"
           >
-            <!-- Coloca tus videos en la carpeta public/demos/ -->
-            <source src="/demos/deporgo-demo.webm" type="video/webm" />
-            <source src="/demos/deporgo-demo.mp4" type="video/mp4" />
+            <source
+              src={videoDemoClubUrlMobile}
+              type="video/webm"
+              media="(max-width: 767px)"
+            />
+            <source
+              src={videoDemoClubUrl}
+              type="video/webm"
+              media="(min-width: 768px)"
+            />
             Tu navegador no soporta la reproducción de video.
           </video>
         </div>
