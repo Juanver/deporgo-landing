@@ -74,6 +74,7 @@ export interface TopScorer {
   player_name: string;
   goals: number;
   team: MatchTeam;
+  photo_url?: string | null;
 }
 
 export interface PublicLeaguePageData {
