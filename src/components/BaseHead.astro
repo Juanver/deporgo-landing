@@ -17,7 +17,7 @@ interface Props {
 
 const {
   title = "Deporgo | Gestión deportiva por WhatsApp",
-  description = "Automatiza asistencias, comunicación y pagos para clubes y pichangas con Deporgo integrado a WhatsApp.",
+  description = "Automatiza asistencias, comunicación y pagos para clubes, ligas, torneos y campeonatos con Deporgo integrado a WhatsApp.",
   canonical,
   image = logoPath,
   keywords = [],
@@ -31,7 +31,9 @@ const canonicalUrl = canonical
   ? new URL(canonical, site).toString()
   : new URL(Astro.url.pathname, site).toString();
 const ogImage = new URL(image, site).toString();
-const robots = noindex ? "noindex, nofollow" : "index, follow";
+const robots = noindex
+  ? "noindex, nofollow"
+  : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
 const schemaItems = structuredData
   ? Array.isArray(structuredData)
     ? structuredData
@@ -46,6 +48,8 @@ const keywordsContent = keywords.join(", ");
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#020617" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<meta name="format-detection" content="telephone=no" />
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
 <link rel="icon" type="image/x-icon" href="/images/logo.ico" />
@@ -58,6 +62,8 @@ const keywordsContent = keywords.join(", ");
 {keywordsContent && <meta name="keywords" content={keywordsContent} />}
 <meta name="robots" content={robots} />
 <link rel="canonical" href={canonicalUrl} />
+<link rel="alternate" hreflang="es-PE" href={canonicalUrl} />
+<link rel="alternate" hreflang="x-default" href={canonicalUrl} />
 <meta name="author" content="Deporgo" />
 
 <meta property="og:type" content={type} />
@@ -73,6 +79,7 @@ const keywordsContent = keywords.join(", ");
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
+<meta name="twitter:url" content={canonicalUrl} />
 <meta name="twitter:image" content={ogImage} />
 <meta name="twitter:image:alt" content="Deporgo" />
 

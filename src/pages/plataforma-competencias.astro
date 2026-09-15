@@ -1,0 +1,205 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import CompetitionsPlatformSection from "@/components/CompetitionsPlatformSection.astro";
+import CompetitionsPricingSection from "@/components/CompetitionsPricingSection.astro";
+import { platformPageSeo, platformStructuredData } from "@/data/seo";
+---
+
+<Layout
+  title={platformPageSeo.title}
+  description={platformPageSeo.description}
+  canonical={platformPageSeo.canonical}
+  keywords={platformPageSeo.keywords}
+  structuredData={platformStructuredData}
+>
+  <Header />
+
+  <main id="main-content">
+    <section
+      class="pt-32 pb-20"
+      aria-labelledby="platform-hero-title"
+      style="background: linear-gradient(180deg, rgb(15, 23, 42, 0.5) 0%, rgb(15, 23, 42) 100%);"
+    >
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <h1 id="platform-hero-title" class="mb-6 bg-linear-to-r from-primary-400 to-secondary-400 bg-clip-text text-5xl font-bold text-transparent md:text-6xl">
+            Gestión profesional de ligas, torneos y campeonatos
+          </h1>
+          <p class="mb-8 text-xl leading-relaxed text-secondary-300">
+            Organiza tu competencia de principio a fin con una plataforma moderna:
+            resultados en tiempo real, clasificación automática y una vitrina digital
+            lista para compartir.
+          </p>
+          <div class="flex flex-col justify-center gap-4 sm:flex-row">
+            <a
+              href="https://app.deporgo.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-lg bg-primary-500 px-8 py-3 font-semibold text-white transition-colors hover:bg-primary-600"
+              aria-label="Comenzar gratis en Deporgo en una nueva pestaña"
+            >
+              Comenzar gratis
+            </a>
+            <a
+              href="/competencias/liga-san-isidro"
+              class="rounded-lg border border-primary-500 px-8 py-3 font-semibold text-primary-400 transition-colors hover:bg-primary-500/10"
+              aria-label="Ver demo de tabla, fixture y goleadores de la liga San Isidro"
+            >
+              Ver demo
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <CompetitionsPlatformSection />
+    <CompetitionsPricingSection />
+
+    <section
+      id="proceso-plataforma"
+      class="py-20"
+      aria-labelledby="process-title"
+      style="background-color: var(--secondary-800-50);"
+    >
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 id="process-title" class="mb-4 bg-linear-to-r from-primary-400 to-secondary-400 bg-clip-text text-center text-4xl font-bold text-transparent md:text-5xl">
+          Implementación simple
+        </h2>
+        <p class="mb-12 text-center text-lg text-secondary-300">
+          En 3 pasos, tu competencia queda lista para competir y comunicar mejor.
+        </p>
+
+        <ol class="grid gap-8 md:grid-cols-3">
+          <li class="text-center">
+            <div class="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-primary-400 to-primary-500 text-2xl font-bold text-white">
+              1
+            </div>
+            <h3 class="mb-2 text-xl font-semibold text-secondary-200">
+              Configura tu competencia
+            </h3>
+            <p class="text-secondary-400">
+              Crea tu liga, torneo o campeonato, define identidad visual y publica tu URL oficial.
+            </p>
+          </li>
+
+          <li class="text-center">
+            <div class="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-primary-400 to-primary-500 text-2xl font-bold text-white">
+              2
+            </div>
+            <h3 class="mb-2 text-xl font-semibold text-secondary-200">
+              Carga equipos y calendario
+            </h3>
+            <p class="text-secondary-400">
+              Registra participantes, arma jornadas y deja preparado el calendario.
+            </p>
+          </li>
+
+          <li class="text-center">
+            <div class="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-primary-400 to-primary-500 text-2xl font-bold text-white">
+              3
+            </div>
+            <h3 class="mb-2 text-xl font-semibold text-secondary-200">
+              Actualiza y comparte
+            </h3>
+            <p class="text-secondary-400">
+              Publica resultados y la tabla se recalcula automáticamente para todos.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="faq-plataforma" class="py-20" aria-labelledby="faq-title">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 id="faq-title" class="mb-12 bg-linear-to-r from-primary-400 to-secondary-400 bg-clip-text text-center text-4xl font-bold text-transparent">
+          Preguntas frecuentes
+        </h2>
+
+        <div class="space-y-6">
+          <details class="group cursor-pointer rounded-lg border border-secondary-700 p-6 transition-colors hover:border-primary-500/50">
+            <summary class="flex items-center justify-between font-semibold text-secondary-200">
+              <span>¿Puedo gestionar varias ligas, torneos o campeonatos al mismo tiempo?</span>
+              <span class="transition-transform group-open:rotate-180" aria-hidden="true">▼</span>
+            </summary>
+            <p class="mt-4 text-secondary-400">
+              Sí. El plan Professional permite gestionar ligas, torneos y campeonatos
+              simultáneos; el plan Enterprise escala a operación ilimitada.
+            </p>
+          </details>
+
+          <details class="group cursor-pointer rounded-lg border border-secondary-700 p-6 transition-colors hover:border-primary-500/50">
+            <summary class="flex items-center justify-between font-semibold text-secondary-200">
+              <span>¿Qué ocurre con mis datos si pauso el servicio?</span>
+              <span class="transition-transform group-open:rotate-180" aria-hidden="true">▼</span>
+            </summary>
+            <p class="mt-4 text-secondary-400">
+              Conservamos tus datos por 90 días para que puedas reactivar sin perder
+              historial. También puedes solicitar eliminación definitiva.
+            </p>
+          </details>
+
+          <details class="group cursor-pointer rounded-lg border border-secondary-700 p-6 transition-colors hover:border-primary-500/50">
+            <summary class="flex items-center justify-between font-semibold text-secondary-200">
+              <span>¿Se pueden asignar varios administradores?</span>
+              <span class="transition-transform group-open:rotate-180" aria-hidden="true">▼</span>
+            </summary>
+            <p class="mt-4 text-secondary-400">
+              Sí. Puedes delegar gestión con distintos permisos según tu plan.
+            </p>
+          </details>
+
+          <details class="group cursor-pointer rounded-lg border border-secondary-700 p-6 transition-colors hover:border-primary-500/50">
+            <summary class="flex items-center justify-between font-semibold text-secondary-200">
+              <span>¿Incluye prueba gratuita?</span>
+              <span class="transition-transform group-open:rotate-180" aria-hidden="true">▼</span>
+            </summary>
+            <p class="mt-4 text-secondary-400">
+              Sí. Puedes comenzar con prueba sin tarjeta para validar la plataforma
+              en tu operación real.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="contacto-plataforma"
+      class="border-y border-primary-500/20 py-20"
+      aria-labelledby="cta-title"
+      style="background: linear-gradient(90deg, var(--primary-600-20) 0%, var(--secondary-600-20) 50%, var(--primary-600-20) 100%);"
+    >
+      <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+        <h2 id="cta-title" class="mb-4 text-4xl font-bold text-secondary-100">
+          Lleva tu torneo o campeonato al siguiente nivel
+        </h2>
+        <p class="mb-8 text-xl text-secondary-300">
+          Empieza hoy con una plataforma pensada para orden, visibilidad y crecimiento.
+        </p>
+        <div class="flex flex-col justify-center gap-4 sm:flex-row">
+          <a
+            href="https://app.deporgo.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-lg bg-primary-500 px-8 py-4 font-semibold text-white transition-colors hover:bg-primary-600"
+            aria-label="Crear competencia ahora en una nueva pestaña"
+          >
+            Crear competencia ahora
+          </a>
+          <a
+            href="https://wa.me/51928936489"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-lg border border-primary-500 px-8 py-4 font-semibold text-primary-400 transition-colors hover:bg-primary-500/10"
+            aria-label="Solicitar demostración por WhatsApp en una nueva pestaña"
+          >
+            Solicitar demo
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

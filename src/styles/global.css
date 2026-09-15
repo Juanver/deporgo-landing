@@ -23,6 +23,17 @@
 
 :root {
   color-scheme: dark;
+  --secondary-800-50: rgb(30 41 59 / 0.5);
+  --secondary-800-80: rgb(30 41 59 / 0.8);
+  --primary-400-20: rgb(52 211 153 / 0.2);
+  --primary-500-20: rgb(16 185 129 / 0.2);
+  --primary-500-10: rgb(16 185 129 / 0.1);
+  --primary-600-10: rgb(5 150 105 / 0.1);
+  --primary-600-20: rgb(5 150 105 / 0.2);
+  --secondary-600-10: rgb(71 85 105 / 0.1);
+  --secondary-600-20: rgb(71 85 105 / 0.2);
+  --primary-300-45: rgb(110 231 183 / 0.45);
+  --secondary-700-80: rgb(51 65 85 / 0.8);
 }
 
 html,

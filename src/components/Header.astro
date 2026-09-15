@@ -9,24 +9,13 @@ const homeSectionHref = (sectionId: string) =>
   isHomePage ? `#${sectionId}` : `/#${sectionId}`;
 
 const desktopNavLinks = [
-  { href: "/automatizacion-deportiva/", label: "Automatización deportiva" },
-  { href: homeSectionHref("demo"), label: "Demo" },
-  { href: homeSectionHref("clientes"), label: "Clientes" },
-  { href: homeSectionHref("como-funciona"), label: "Cómo funciona" },
-  { href: homeSectionHref("clubs"), label: "Soluciones" },
-  { href: homeSectionHref("faq"), label: "FAQ" },
-];
-
-const mobileNavLinks = [
-  { href: "/automatizacion-deportiva/", label: "Automatización deportiva" },
-  { href: homeSectionHref("demo"), label: "Demo" },
-  { href: homeSectionHref("clientes"), label: "Clientes" },
-  { href: homeSectionHref("como-funciona"), label: "Cómo funciona" },
-  { href: homeSectionHref("clubs"), label: "Para clubes" },
-  { href: homeSectionHref("pichangas"), label: "Para pichangas" },
+  { href: "/plataforma-competencias/", label: "Ligas y torneos" },
+  { href: "/automatizacion-deportiva/", label: "Clubes y pichangas" },
   { href: homeSectionHref("faq"), label: "FAQ" },
   { href: homeSectionHref("contacto"), label: "Contacto" },
 ];
+
+const mobileNavLinks = desktopNavLinks;
 ---
 
 <header

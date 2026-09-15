@@ -1,0 +1,399 @@
+---
+export const prerender = false;
+
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { getPublicLeaguePageData, LeagueNotFoundError } from "@/lib/supabase";
+import { siteConfig } from "@/data/seo";
+
+const { slug } = Astro.params;
+
+if (!slug) {
+  return Astro.redirect("/404");
+}
+
+let pageData;
+
+try {
+  pageData = await getPublicLeaguePageData(slug);
+} catch (error) {
+  if (error instanceof LeagueNotFoundError) {
+    return Astro.redirect("/404");
+  }
+
+  console.error("Error loading public competition page", error);
+  throw error;
+}
+
+if (!pageData) {
+  return Astro.redirect("/404");
+}
+
+const { league, sponsors, activeTournament, standings, matchesByRound, topScorers } = pageData;
+
+const canonical = `https://www.deporgo.com/competencias/${league.slug}`;
+const pageTitle = `${league.name} | Tabla, fixture y goleadores`;
+const pageDescription = `Sigue la tabla de posiciones, fixture y goleadores de ${league.name} en Deporgo.`;
+
+const leagueStructuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    name: league.name,
+    url: canonical,
+    ...(league.logo_url ? { logo: league.logo_url } : {}),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: pageTitle,
+    description: pageDescription,
+    url: canonical,
+    inLanguage: "es-PE",
+    isPartOf: {
+      "@type": "WebSite",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Inicio",
+        item: `${siteConfig.url}/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Competencias",
+        item: `${siteConfig.url}/competencias/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: league.name,
+        item: canonical,
+      },
+    ],
+  },
+];
+
+const themeStyle = `
+  --league-primary: ${league.color_primary};
+  --league-secondary: ${league.color_secondary};
+`;
+
+const formatMatchDate = (dateValue: string) =>
+  new Intl.DateTimeFormat("es-PE", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(new Date(dateValue));
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  structuredData={leagueStructuredData}
+>
+  <div style={themeStyle}>
+    <Header />
+
+    <main id="main-content">
+      <section
+        class="border-b border-secondary-700/70 px-4 pt-24 pb-12 sm:px-6 sm:pt-28 sm:pb-14 lg:px-8"
+        style="background: linear-gradient(135deg, color-mix(in srgb, var(--league-primary) 20%, transparent), color-mix(in srgb, var(--league-secondary) 28%, #020617));"
+      >
+        <div class="mx-auto flex w-full max-w-7xl flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+          <div class="max-w-3xl">
+            <span class="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-secondary-300">
+              Competencia pública
+            </span>
+            <h1 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-5xl">
+              {league.name}
+            </h1>
+            <p class="mt-4 max-w-2xl text-base text-secondary-200 sm:text-lg">
+              Vista oficial de la competencia con tabla de posiciones, fixture por fechas
+              y ranking de goleadores actualizado.
+            </p>
+            {
+              activeTournament && (
+                <div class="mt-6 inline-flex rounded-2xl border border-white/10 bg-secondary-950/40 px-4 py-3 text-sm text-secondary-200">
+                  Torneo activo: <span class="ml-2 font-semibold text-white">{activeTournament.name}</span>
+                </div>
+              )
+            }
+          </div>
+
+          <div class="flex w-full flex-col gap-4 lg:w-auto lg:items-end">
+            {
+              league.logo_url ? (
+                <img
+                  src={league.logo_url}
+                  alt={`Logo de ${league.name}`}
+                  class="h-24 w-24 rounded-2xl border border-white/10 bg-secondary-950/50 object-cover p-2 shadow-2xl"
+                  loading="eager"
+                  decoding="async"
+                />
+              ) : (
+                <div class="flex h-24 w-24 items-center justify-center rounded-2xl border border-white/10 bg-secondary-950/50 text-3xl font-bold text-white shadow-2xl">
+                  {league.name.slice(0, 1)}
+                </div>
+              )
+            }
+            <button
+              class="inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 sm:w-auto"
+              style="background-color: var(--league-primary);"
+              data-share-button
+              data-share-url={canonical}
+            >
+              Compartir competencia
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {
+        sponsors.length > 0 && (
+          <section class="px-4 py-10 sm:px-6 lg:px-8">
+            <div class="mx-auto flex w-full max-w-7xl flex-col gap-5">
+              <div class="flex items-center justify-between gap-4">
+                <h2 class="text-xl font-semibold text-secondary-100">Sponsors</h2>
+                <span class="text-sm text-secondary-400">Aliados comerciales de la competencia</span>
+              </div>
+              <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                {sponsors.map((sponsor) => (
+                  <a
+                    href={sponsor.link_url ?? "#"}
+                    target={sponsor.link_url ? "_blank" : undefined}
+                    rel={sponsor.link_url ? "noopener noreferrer" : undefined}
+                    class="flex min-h-28 items-center gap-4 rounded-2xl border border-secondary-700 bg-secondary-900/70 p-5 transition hover:border-secondary-500"
+                  >
+                    {sponsor.image_url ? (
+                      <img
+                        src={sponsor.image_url}
+                        alt={sponsor.name}
+                        class="h-12 w-12 rounded-xl object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary-800 text-sm font-bold text-secondary-200">
+                        {sponsor.name.slice(0, 1)}
+                      </div>
+                    )}
+                    <div>
+                      <p class="font-semibold text-secondary-100">{sponsor.name}</p>
+                      <p class="text-sm text-secondary-400">Sponsor oficial</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        )
+      }
+
+      <section class="px-4 py-4 pb-10 sm:px-6 lg:px-8">
+        <div class="mx-auto grid w-full max-w-7xl gap-6 lg:grid-cols-[1.45fr_1fr]">
+          <article class="min-w-0 overflow-hidden rounded-3xl border border-secondary-700 bg-secondary-900/75 p-6 shadow-xl">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <h2 class="text-2xl font-semibold text-white">Tabla de posiciones</h2>
+                <p class="mt-1 text-sm text-secondary-400">
+                  Ordenada por puntos, diferencia de goles y goles a favor.
+                </p>
+              </div>
+            </div>
+
+            {
+              standings.length > 0 ? (
+                <>
+                  <p class="mt-4 text-xs text-secondary-400 md:hidden">
+                    Desliza horizontalmente para ver todas las estadísticas.
+                  </p>
+                  <div class="mt-3 w-full max-w-full overflow-x-auto overscroll-x-contain">
+                    <table class="min-w-190 w-full text-sm">
+                    <thead>
+                      <tr class="border-b border-secondary-700 text-left text-secondary-400">
+                        <th class="px-3 py-3 font-medium">Equipo</th>
+                        <th class="px-3 py-3 font-medium text-white">Pts</th>
+                        <th class="px-3 py-3 font-medium">PJ</th>
+                        <th class="px-3 py-3 font-medium">PG</th>
+                        <th class="px-3 py-3 font-medium">PE</th>
+                        <th class="px-3 py-3 font-medium">PP</th>
+                        <th class="px-3 py-3 font-medium">GF</th>
+                        <th class="px-3 py-3 font-medium">GC</th>
+                        <th class="px-3 py-3 font-medium">DG</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {standings.map((row, index) => (
+                        <tr class="border-b border-secondary-800/70 last:border-b-0">
+                          <td class="px-3 py-4">
+                            <div class="flex items-center gap-3">
+                              <span
+                                class="flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-white"
+                                style={`background-color: ${index < 3 ? league.color_primary : league.color_secondary};`}
+                              >
+                                {index + 1}
+                              </span>
+                              <div>
+                                <p class="font-semibold text-secondary-100">{row.team_name}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="px-3 py-4 font-semibold text-white">{row.puntos}</td>
+                          <td class="px-3 py-4 text-secondary-300">{row.pj}</td>
+                          <td class="px-3 py-4 text-secondary-300">{row.pg}</td>
+                          <td class="px-3 py-4 text-secondary-300">{row.pe}</td>
+                          <td class="px-3 py-4 text-secondary-300">{row.pp}</td>
+                          <td class="px-3 py-4 text-secondary-300">{row.gf}</td>
+                          <td class="px-3 py-4 text-secondary-300">{row.gc}</td>
+                          <td class="px-3 py-4 text-secondary-300">{row.dg}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                    </table>
+                  </div>
+                </>
+              ) : (
+                <p class="mt-6 text-sm text-secondary-400">
+                  Aún no hay partidos finalizados para calcular la tabla.
+                </p>
+              )
+            }
+          </article>
+
+          <article class="rounded-3xl border border-secondary-700 bg-secondary-900/75 p-6 shadow-xl">
+            <h2 class="text-2xl font-semibold text-white">Goleadores</h2>
+            <p class="mt-1 text-sm text-secondary-400">
+              Top 10 del torneo activo.
+            </p>
+
+            {
+              topScorers.length > 0 ? (
+                <ol class="mt-6 space-y-3">
+                  {topScorers.map((scorer, index) => (
+                    <li class="flex flex-col gap-3 rounded-2xl border border-secondary-800 bg-secondary-950/60 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+                      <div class="flex items-center gap-3">
+                        <span class="text-sm font-semibold text-secondary-400">#{index + 1}</span>
+                        <div class="min-w-0">
+                          <p class="truncate font-semibold text-secondary-100">{scorer.player_name}</p>
+                          <p class="text-sm text-secondary-400">{scorer.team.name}</p>
+                        </div>
+                      </div>
+                      <span
+                        class="inline-flex min-w-10 self-start items-center justify-center rounded-full px-3 py-1 text-sm font-bold text-white sm:self-auto"
+                        style="background-color: var(--league-primary);"
+                      >
+                        {scorer.goals}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              ) : (
+                <p class="mt-6 text-sm text-secondary-400">
+                  Aún no hay goleadores registrados para este torneo.
+                </p>
+              )
+            }
+          </article>
+        </div>
+      </section>
+
+      <section class="px-4 pb-20 sm:px-6 lg:px-8">
+        <div class="mx-auto w-full max-w-7xl rounded-3xl border border-secondary-700 bg-secondary-900/75 p-6 shadow-xl">
+          <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 class="text-2xl font-semibold text-white">Fixture y fechas</h2>
+              <p class="text-sm text-secondary-400">
+                Calendario del torneo activo con resultados publicados.
+              </p>
+            </div>
+          </div>
+
+          {
+            matchesByRound.length > 0 ? (
+              <div class="mt-8 grid gap-6 xl:grid-cols-2">
+                {matchesByRound.map((round) => (
+                  <section class="rounded-2xl border border-secondary-800 bg-secondary-950/55 p-5">
+                    <h3 class="text-lg font-semibold text-secondary-100">Fecha {round.roundNumber}</h3>
+                    <div class="mt-4 space-y-3">
+                      {round.matches.map((match) => (
+                        <article class="rounded-2xl border border-secondary-800/80 px-4 py-4">
+                          <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                            <div class="min-w-0 flex-1 text-center sm:text-left">
+                              <p class="truncate text-sm font-semibold text-secondary-100 sm:text-base">
+                                {match.home_team.name}
+                              </p>
+                            </div>
+                            <div class="mx-auto rounded-xl border border-white/10 bg-secondary-900 px-4 py-2 text-center sm:mx-0">
+                              <p class="text-base font-bold text-white">
+                                {match.home_score ?? "-"} : {match.away_score ?? "-"}
+                              </p>
+                              <p class="text-[11px] uppercase tracking-[0.16em] text-secondary-500">
+                                {match.status}
+                              </p>
+                            </div>
+                            <div class="min-w-0 flex-1 text-center sm:text-right">
+                              <p class="truncate text-sm font-semibold text-secondary-100 sm:text-base">
+                                {match.away_team.name}
+                              </p>
+                            </div>
+                          </div>
+                          <p class="mt-3 text-center text-xs text-secondary-500 sm:text-left">
+                            {formatMatchDate(match.match_date)}
+                          </p>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </div>
+            ) : (
+              <p class="mt-6 text-sm text-secondary-400">
+                Aún no hay partidos programados para mostrar en el fixture.
+              </p>
+            )
+          }
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>
+
+<script is:inline>
+  const shareButton = document.querySelector("[data-share-button]");
+
+  if (shareButton instanceof HTMLButtonElement) {
+    shareButton.addEventListener("click", async () => {
+      const url = shareButton.dataset.shareUrl ?? window.location.href;
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: document.title,
+            url,
+          });
+          return;
+        } catch {
+        }
+      }
+
+      await navigator.clipboard.writeText(url);
+      shareButton.textContent = "Link copiado";
+
+      window.setTimeout(() => {
+        shareButton.textContent = "Compartir competencia";
+      }, 1800);
+    });
+  }
+</script>

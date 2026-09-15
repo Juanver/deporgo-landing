@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.deporgo.com/sitemap.xml
+Host: https://www.deporgo.com
+Sitemap: https://www.deporgo.com/sitemap-index.xml

@@ -3,7 +3,11 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import FaqSection from "@/components/FaqSection.astro";
-import { automationLandingSeo, homeStructuredData } from "@/data/seo";
+import SolutionSection from "@/components/SolutionSection.astro";
+import FeatureCard from "@/components/FeatureCard.astro";
+import ComparisonSection from "@/components/ComparisonSection.astro";
+import { clubFeatures, pichangaFeatures } from "@/data/features";
+import { automationLandingSeo, automationStructuredData } from "@/data/seo";
 ---
 
 <Layout
@@ -11,7 +15,7 @@ import { automationLandingSeo, homeStructuredData } from "@/data/seo";
   description={automationLandingSeo.description}
   canonical={automationLandingSeo.canonical}
   keywords={automationLandingSeo.keywords}
-  structuredData={homeStructuredData}
+  structuredData={automationStructuredData}
 >
   <Header />
 
@@ -22,10 +26,10 @@ import { automationLandingSeo, homeStructuredData } from "@/data/seo";
           Automatización deportiva
         </p>
         <h1 id="automation-title" class="mt-4 max-w-4xl text-4xl font-extrabold leading-tight text-white sm:text-5xl" data-reveal>
-          Software de automatización deportiva para clubes, academias y pichangas
+          Software de automatización deportiva para clubes, ligas, torneos y campeonatos
         </h1>
         <p class="mt-5 max-w-3xl text-lg text-secondary-300" data-reveal>
-          Deporgo centraliza convocatorias, asistencia y pagos en un flujo por WhatsApp para que tu operación escale con menos trabajo manual.
+          Deporgo centraliza convocatorias, asistencia y pagos en un flujo por WhatsApp para que tu operación escale con menos trabajo manual, desde entrenamientos hasta campeonatos.
         </p>
         <div class="mt-8 flex flex-wrap gap-3" data-reveal>
           <a
@@ -37,7 +41,7 @@ import { automationLandingSeo, homeStructuredData } from "@/data/seo";
           >
             Probar Deporgo
           </a>
-          <a href="/#como-funciona" class="btn-secondary" aria-label="Ver cómo funciona Deporgo">
+          <a href="#como-funciona" class="btn-secondary" aria-label="Ver cómo funciona Deporgo">
             Ver cómo funciona
           </a>
         </div>
@@ -63,6 +67,107 @@ import { automationLandingSeo, homeStructuredData } from "@/data/seo";
         </div>
       </div>
     </section>
+
+    <SolutionSection />
+
+    <section
+      id="como-funciona"
+      class="border-y border-secondary-700 py-20"
+      aria-labelledby="how-title"
+      data-reveal
+    >
+      <div class="section-container">
+        <h2 id="how-title" class="section-title" data-reveal>Cómo funciona</h2>
+        <p class="section-subtitle" data-reveal>
+          Una operación clara en tres pasos para mover tu gestión deportiva de
+          lo manual a lo automático.
+        </p>
+
+        <ol class="mt-10 grid gap-6 md:grid-cols-3">
+          <li class="card-base" data-reveal>
+            <span class="text-sm font-semibold text-primary-400">Paso 1</span>
+            <h3 class="mt-2 text-xl font-semibold text-secondary-200">
+              Configura tu actividad
+            </h3>
+            <p class="mt-2 text-secondary-300">
+              Define horarios, cupos, reglas y valores de inscripción según tu
+              tipo de operación.
+            </p>
+          </li>
+          <li class="card-base" data-reveal>
+            <span class="text-sm font-semibold text-primary-400">Paso 2</span>
+            <h3 class="mt-2 text-xl font-semibold text-secondary-200">
+              Invita por WhatsApp
+            </h3>
+            <p class="mt-2 text-secondary-300">
+              Comparte tu convocatoria y deja que Deporgo gestione
+              confirmaciones y respuestas.
+            </p>
+          </li>
+          <li class="card-base" data-reveal>
+            <span class="text-sm font-semibold text-primary-400">Paso 3</span>
+            <h3 class="mt-2 text-xl font-semibold text-secondary-200">
+              Automatiza cierres y seguimiento
+            </h3>
+            <p class="mt-2 text-secondary-300">
+              Cuando se completa el aforo, Deporgo cierra listas y mantiene al
+              grupo informado automáticamente.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="clubs" class="py-20" aria-labelledby="clubs-title" data-reveal>
+      <div class="section-container">
+        <h2 id="clubs-title" class="section-title" data-reveal>
+          Soluciones para Clubes y Academias
+        </h2>
+        <p class="section-subtitle" data-reveal>
+          Escala tu operación profesional con control de membresías, asistencia
+          y base operativa para ligas, torneos y campeonatos.
+        </p>
+
+        <div class="mt-10 grid gap-6 lg:grid-cols-3" data-reveal>
+          {clubFeatures.map((feature) => <FeatureCard {...feature} />)}
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="pichangas"
+      class="border-t border-secondary-700 py-20"
+      aria-labelledby="pichangas-title"
+      data-reveal
+    >
+      <div class="section-container">
+        <h2 id="pichangas-title" class="section-title" data-reveal>
+          Soluciones para Pichangas
+        </h2>
+        <p class="section-subtitle" data-reveal>
+          Gestiona partidos casuales con listas rápidas, pagos ordenados y
+          cierre automático por WhatsApp.
+        </p>
+
+        <div class="mt-10 grid gap-6 lg:grid-cols-3" data-reveal>
+          {pichangaFeatures.map((feature) => <FeatureCard {...feature} />)}
+        </div>
+
+        <div class="mt-10" data-reveal>
+          <a
+            href="https://app.deporgo.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+            aria-label="Probar Deporgo para clubes y pichangas"
+          >
+            Probar app
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <ComparisonSection />
 
     <FaqSection />
   </main>

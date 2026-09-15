@@ -1,0 +1,47 @@
+---
+import type { Feature } from "@/types/iconFeatures";
+
+interface Props {
+  feature: Feature;
+  index: number;
+}
+
+const { feature: { Icon, title, description, points }, index } = Astro.props;
+---
+
+<div
+  class="card-feature rounded-xl border border-secondary-700 p-6 transition-colors duration-300 hover:border-primary-500/50"
+  data-reveal
+  data-reveal-delay={`${index * 100}`}
+>
+  <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg text-white" style="background: linear-gradient(135deg, #34d399 0%, #10b981 100%);">
+    <Icon class="h-6 w-6 text-white" />
+  </div>
+
+  <h3 class="mb-2 text-xl font-semibold text-secondary-200">
+    {title}
+  </h3>
+
+  <p class="mb-4 text-sm text-secondary-300">
+    {description}
+  </p>
+
+  <ul class="space-y-2" role="list">
+    {points.map((point) => (
+      <li class="flex items-start gap-2 text-sm text-secondary-400">
+        <span class="mt-0.5 font-bold text-primary-400" aria-hidden="true">✓</span>
+        <span>{point}</span>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .card-feature {
+    background-color: var(--secondary-800-50);
+  }
+
+  .card-feature:hover {
+    background-color: var(--secondary-800-80);
+  }
+</style>
